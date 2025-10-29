@@ -26,12 +26,12 @@ Then, you can tackle **bonus challenges** that make it even more powerful — li
 ## Files Included
 
 codeyou-secops-python-challenge1/  
-├── README.md 
+├── README.md   
 ├── asset_list.py             # The script you’ll fix and improve  
 ├── asset_inventory_list.csv  # Local CSV file to test with  
 └── docs/  
-    └── getting_data_from_the_api.md        # Instructions for the optional API bonus  
-    └── displaying_data_in_table_format.md  # Instructions for the optional table bonus  
+        └── getting_data_from_the_api.md        # Instructions for the optional API bonus  
+        └── displaying_data_in_table_format.md  # Instructions for the optional table bonus  
 
 ---
 
