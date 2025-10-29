@@ -51,5 +51,19 @@ def main():
     Path(args.outfile).write_text(json.dumps(out, indent=2), encoding="utf-8")
     print(f"Wrote {len(out)} assets to {args.outfile}")
 
+
+# TODO: BONUS!!!!
+# If you've completed all the TODOs up to this point then you are encouraged to add more functionality to this script including the following:
+
+# - Ensure that a user can pass in the `--tag` to filter results by tag
+
+# - Ensure that a user can filter by hostname in a similar way as you have filtered by owner and tag
+
+# - Ensure that your script can actually reach the real API for grabbing the asset inventory list in realtime rather than referencing a downloaded file such as `asset_inventory_list.csv`
+    # - NOTE: There are instructions in a relevant README for how to accomplish reaching the API if you are interested
+
+# - (HARD) Add an optional argument for the user so that they can display the data in a Table format instead of JSON. The script should still default to JSON
+    # - NOTE: Instructions for accomplishing this are in a readme file within the `/docs` directory
+
 if __name__ == "__main__":
     main()
