@@ -59,7 +59,7 @@ def main():
 
 # - Ensure that a user can filter by hostname in a similar way as you have filtered by owner and tag
 
-# - Ensure that your script can actually reach the real API for grabbing the asset inventory list in realtime rather than referencing a downloaded file such as `asset_inventory_list.csv`
+# - (HARD) Ensure that your script can actually reach the real API for grabbing the asset inventory list in realtime rather than referencing a downloaded file such as `asset_inventory_list.csv`
     # - NOTE: There are instructions in a relevant README for how to accomplish reaching the API if you are interested
 
 # - (HARD) Add an optional argument for the user so that they can display the data in a Table format instead of JSON. The script should still default to JSON
