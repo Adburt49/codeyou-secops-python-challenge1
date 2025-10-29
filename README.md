@@ -25,13 +25,13 @@ Then, you can tackle **bonus challenges** that make it even more powerful — li
 
 ## Files Included
 
-codeyou-secops-python-challenge1/
-├── README.md
-├── asset_list.py             # The script you’ll fix and improve
-├── asset_inventory_list.csv  # Local CSV file to test with
-└── docs/
-    └── getting_data_from_the_api.md        # Instructions for the optional API bonus
-    └── displaying_data_in_table_format.md  # Instructions for the optional table bonus
+codeyou-secops-python-challenge1/  
+├── README.md 
+├── asset_list.py             # The script you’ll fix and improve  
+├── asset_inventory_list.csv  # Local CSV file to test with  
+└── docs/  
+    └── getting_data_from_the_api.md        # Instructions for the optional API bonus  
+    └── displaying_data_in_table_format.md  # Instructions for the optional table bonus  
 
 ---
 
@@ -55,7 +55,7 @@ Your job is to fix the script by following the `# TODO:` comments inside it.
 
 ---
 
-## 🧩 Core Tasks
+## Core Tasks
 
 Follow each `# TODO:` marker inside `asset_lister.py` in order.
 
@@ -83,7 +83,7 @@ Follow each `# TODO:` marker inside `asset_lister.py` in order.
 
 ---
 
-## ✅ When You’re Done
+## When You’re Done
 
 You should be able to run:
 
@@ -99,7 +99,7 @@ Wrote 12 assets to critical_assets.json
 
 ---
 
-## 🏆 Bonus Objectives
+## Bonus Objectives
 
 ### 1. Filtering Enhancements
 
@@ -171,5 +171,5 @@ You’re now filtering assets **owned by Jordan**, tagged **web**, that are **hi
 
 ---
 
-Good luck — and remember:
+Good luck — and remember:  
 **Every `# TODO:` comment is a breadcrumb to the next discovery!**
