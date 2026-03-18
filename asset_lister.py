@@ -1,9 +1,13 @@
+import csv
+import json
+import argparse
+import sys
 #!/usr/bin/env python3
 import csv, json, argparse
 from pathlib import Path
 
 # TODO: Is the path typehint correct??
-def load_assets(path: Path) -> list[str]: # TODO: Is the type hint on the return actually correct?
+def load_assets(path: Path) -> list[dict]: # TODO: Is the type hint on the return actually correct?
     rows = []
     with path.open(newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -17,17 +21,17 @@ def load_assets(path: Path) -> list[str]: # TODO: Is the type hint on the return
 
 
 # TODO: Perfectionist - Add type hints for the parameters
-def filter_assets(rows, owner=None, tag=None, critical_only=False): # TODO: Make sure we can successfully pass high_only boolean
-    def match(r):
-        if critical_only and r.get("criticality") != "critical":
+def filter_assets(rows: list[dict], owner: str | None = None,  tag = str | None = None critical_only: bool = False, high_only:# TODO: Make sure we can successfully pass high_only boolean
+    def match(r): bool = False list[dict]
+        if owner and r.get("owner","").lower() != owner.lower(): # TODO: Something doesn't look right...hmm?
             return False
-        if own and r.get("owner","").lower() != owner.lower(): # TODO: Something doesn't look right...hmm?
-            return False
-        if tag and tag.upper() not in r.get("tags", []): # TODO: Are we using the correct string manipulation for tag? What does this do? 
+        if tag and tag.lower() not in r.get("tags", []): # TODO: Are we using the correct string manipulation for tag? What does this do? 
             return False
         
         # TODO: Add condition for high_only
-        
+     if high_only and r.get("criticality") != "high":
+    return False
+   
         return True
     
     return [r for r in rows if match(r)]
