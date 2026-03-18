@@ -7,11 +7,13 @@ import csv, json, argparse
 from pathlib import Path
 
 # TODO: Is the path typehint correct??
-def load_assets(path: Path) -> list[dict]: # TODO: Is the type hint on the return actually correct?
-    rows = []
-    with path.open(newline='', encoding='utf-8') as f:
+def load_assets(path: Path) -> list[dict[str, str]]:# TODO: Is the type hint on the return actually correct? 
+        
+    with path.open("r", newline=""), as f:
         reader = csv.DictReader(f)
-        for r in reader:
+        assets = list(reader)
+        return assets
+        
             r = {k: (v.strip() if isinstance(v, str) else v) for k, v in r.items()}
             # normalize tags to a list of lowercase tokens
             r["tags"] = [t.strip().lower() for t in (r.get("tags","")).split(",") if t.strip()]
@@ -21,10 +23,12 @@ def load_assets(path: Path) -> list[dict]: # TODO: Is the type hint on the retur
 
 
 # TODO: Perfectionist - Add type hints for the parameters
-def filter_assets(rows: list[dict], owner: str | None = None,  tag = str | None = None critical_only: bool = False, high_only:# TODO: Make sure we can successfully pass high_only boolean
-    def match(r): bool = False list[dict]
+def filter_assets(rows: list[dict], owner: str | None = None,  tag = str | None = None critical_only: bool = False, high_only: bool = false# TODO: Make sure we can successfully pass high_only boolean
+    def match(r):
+        # owner filter 
         if owner and r.get("owner","").lower() != owner.lower(): # TODO: Something doesn't look right...hmm?
             return False
+            tagf filter
         if tag and tag.lower() not in r.get("tags", []): # TODO: Are we using the correct string manipulation for tag? What does this do? 
             return False
         
