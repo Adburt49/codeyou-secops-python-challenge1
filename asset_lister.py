@@ -1,65 +1,72 @@
 import csv
 import json
-import argparse
-import sys
-#!/usr/bin/env python3
-import csv, json, argparse
+import argparse 
 from pathlib import Path
+#!/usr/bin/env python3
 
 # TODO: Is the path typehint correct??
-def load_assets(path: Path) -> list[dict[str, str]]:# TODO: Is the type hint on the return actually correct? 
-        
-    with path.open("r", newline=""), as f:
+def load_assets(path: Path) -> list[dict]:# TODO: Is the type hint on the return actually correct? 
+
+    rows = []
+    if not path'exists():
+        return []
+
+    with path.open("r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        assets = list(reader)
-        return assets
+        for r in reader:
         
             r = {k: (v.strip() if isinstance(v, str) else v) for k, v in r.items()}
             # normalize tags to a list of lowercase tokens
+            tag_raw = r.get("tags", "")    
             r["tags"] = [t.strip().lower() for t in (r.get("tags","")).split(",") if t.strip()]
-            r["criticality"] = r.get("criticality","").strip().lower()
-            rows.append(r)
+          
+           r["criticality"] = r.get("criticality","").strip().lower()
+           rows.append(r)
     return rows
 
-
-# TODO: Perfectionist - Add type hints for the parameters
-def filter_assets(rows: list[dict], owner: str | None = None,  tag = str | None = None critical_only: bool = False, high_only: bool = false# TODO: Make sure we can successfully pass high_only boolean
+def filter_assets(rows: list[dict], owner: str | None = None,  tag: str | None = None, critical_only: bool = False, high_only: bool = False):# TODO: Make sure we can successfully pass high_only boolean
     def match(r):
         # owner filter 
-        if owner and r.get("owner","").lower() != owner.lower(): # TODO: Something doesn't look right...hmm?
+        if owner and r.get("owner", "").lower() != owner.lower(): # TODO: Something doesn't look right...hmm?
             return False
-            tagf filter
+                
         if tag and tag.lower() not in r.get("tags", []): # TODO: Are we using the correct string manipulation for tag? What does this do? 
             return False
         
         # TODO: Add condition for high_only
+     if critical_only and r.get("criticality") != "critical":
+         return False
      if high_only and r.get("criticality") != "high":
-    return False
-   
-        return True
+         return False
+
+    return True
     
     return [r for r in rows if match(r)]
 
 
-def main():
+def main():   
     ap = argparse.ArgumentParser(description="Filter assets from CSV and export to JSON.")
     ap.add_argument("--owner", help="Filter by owner (exact match)")
     ap.add_argument("--tag", help="Filter by tag (lowercase after normalization)")
     ap.add_argument("--critical-only", action="store_true", help="Only include critical assets")
-
-    # TODO: Add another argument for the user to input `--high-only`. This should pass the string `store_true` to action parameter similar to the critical-only argument 
-    
+ # TODO: Add another argument for the user to input `--high-only`. This should pass the string `store_true` to action parameter similar to the critical-only argument    
+    ap.add_argument("--high-only", action="store_true", help="Only show high criticality assets")
     ap.add_argument("--infile", default="asset_inventory_list.csv", help="Input CSV") # TODO: Fix this to reference the actual asset_inventory_list.csv
     ap.add_argument("--outfile", default="critical_assets.json", help="Output JSON")
+   
     args = ap.parse_args()
 
-    rows = load_assets(Path(args.infile))
-    out = filter_assets(rows, owner=args.owner, tag=args.tag, critical_only=args.critical_only) # TODO: You should already have `--high-only` done, how do we pass it to the `filter_assets()`??
+    assets = load_assets(Path(args.infile))
     
-    Path(args.outfile).write_text(json.dumps(out, indent=2), encoding="utf-8")
-    print(f"Wrote {len(out)} assets to {args.outfile}")
+    out = filter_assets(rows, owner=args.owner, tag=args.tag, critical_only=args.critical_only, high_only=args.high_only) # TODO: You should already have `--high-only` done, how do we pass it to the `filter_assets()`??
+    
+    output_path = Path(args.outfile)
+    output_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
+   
+    print(f"Success! Wrote {len(out)} assets to {args.outfile}")
 
-
+if __name__ == "__main__":
+   main()
 # TODO: BONUS!!!!
 # If you've completed all the TODOs up to this point then you are encouraged to add more functionality to this script including the following:
 
