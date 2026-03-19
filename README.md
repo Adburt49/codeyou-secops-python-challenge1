@@ -1,4 +1,18 @@
+## How to Run the Script
 
+After completing the TODOs, you can run the script with the following commands:
+
+### Filter by Criticality
+- **Critical only:** `python asset_lister.py --critical-only`
+- **High only:** `python asset_lister.py --high-only`
+
+### Filter by Owner or Tag
+- **By Owner:** `python asset_lister.py --owner "Jordan Freeman"`
+- **By Tag:** `python asset_lister.py --tag "web"`
+
+### Custom Files
+- **Specify Input:** `python asset_lister.py --infile my_assets.csv`
+- **Specify Output:** `python asset_lister.py --outfile results.json`
 # Asset Inventory Processor (Python Assignment)
 
 ## Goal
